@@ -34,8 +34,178 @@
 
     </form>
  </form>
+    <script>
+//変数たち
+　//キャンバス・描写情報
+　var  canvas  =  document 。getElementById （'canvas' ）;
+　var  ctx  =  canvas 。getContext （'2d' ）;
 
-    <script src="Canvas_play.js"></script>
+  //マウス位置情報（mousex、mousey）
+  VaRの するmouseX 、 mouseYの。
+
+  //現在クリック状態の変数（trueはON、falseはOFF）
+  var  state  =  false ;
+
+//イベントの初期設定
+onRadioButtonChange （）;
+
+//関数たち
+
+    //ラジオボタンが選択された後の処理関数
+    関数 onRadioButtonChange （）{
+
+        //現在設定されているイベントをすべて無くす
+      　キャンバス。removeEventListener （'mousedown' 、 pen_mousedown  、 {  passive：true  } ）;
+ 　     キャンバス。removeEventListener （'mousemove' 、 pen_mousemove  、 {  passive：true  } ）;
+      　キャンバス。removeEventListener （'mouseup' 、 pen_mouseup  、 {  passive：true  } ）;
+        キャンバス。removeEventListener （"click" 、 square_mouseclick  、 {  passive：true  } ）;
+        キャンバス。removeEventListener （"click" 、 triangle_mouseclick 、 {  passive：true  } ）;
+        キャンバス。removeEventListener （"click" 、 maru_mouseclick 、 {  passive：true  } ）;
+
+　　　　//ラジオボタン情報を取得する
+    　  radiobtn1  =  document 。getElementById （"Radio_pen" ）;
+    　  radiobtn2  =  document 。getElementById （"Radio_square" ）;
+    　  radiobtn3  =  document 。getElementById （"Radio_triangle" ）;
+      　radiobtn4  =  document 。getElementById （"Radio_maru" ）;
+　
+
+    　  もし （radiobtn1 。チェックする ==  真） {
+
+        　　　コンソール。log （"現在、ペン機能が選択されています" ）;
+
+      　　　　キャンバス。addEventListener （'mousedown' 、 pen_mousedown  ）;
+ 　   　　　　キャンバス。addEventListener （'mousemove' 、 pen_mousemove  ）;
+      　　　　キャンバス。addEventListener （'mouseup' 、 pen_mouseup  ）;
+
+     　 } 他の 場合 （radiobtn2 。はチェック ==  真）{
+
+ 　   　　　　コンソール。log （"現在、■スタンプ機能が選択されています" ）;
+ 　   　　　　キャンバス。addEventListener （'click' 、 square_mouseclick  ）;
+
+    　  } 他の 場合 （radiobtn3 。はチェック ==  真）{
+
+ 　   　　　　コンソール。log （"現在、▲スタンプ機能が選択されています" ）;
+ 　   　　　　キャンバス。addEventListener （'click' 、 triangle_mouseclick  ）;
+
+      　} 他の 場合 （radiobtn4 。はチェック ==  真）{
+
+ 　   　　　　コンソール。log （"現在、●スタンプ機能が選択されています" ）;
+ 　   　　　　キャンバス。addEventListener （'click' 、 maru_mouseclick  ）;
+
+     　 }
+
+    }
+
+//クリックイベント
+//ペン機能
+　// mousedown時のイベント
+　関数 pen_mousedown （e ） {
+
+　　　　 //クリックした位置を取得する
+         するmouseX  =  E 。offsetX ;
+         mouseYの =  E 。offsetY ;
+
+         //クリックしていたらONにする（状態をtrueにする）
+  　　 　state  =  true ;  //クリック状態をON
+
+　}
+
+  // mousemove時のイベント
+　関数 pen_mousemove （e ） {
+
+　 　　　//クリックされてなかったら実行しない
+　 　　　if （！state ） return ;
+
+　 　　　//クリックされていたら以下を実行する 
+　 　　　ctx 。lineWidth  =  4.0 ;                   //線の太さ
+　 　　　ctx 。strokeStyle  =   "＃6F8174" ;    //線のカラー
+　 　　　ctx 。lineCap  =  'round' ;               //線の両端に丸みを付けてスムーズな描画にする　 
+
+　 　　　ctx 。beginPath （）; //パスをリセットする。　　                   
+　 　　　ctx 。moveTo （するmouseX 、 mouseYの）。 //パスの開始座標をクリックした点にする　　　     
+　 　　　ctx 。lineTo （E 。offsetX 、 E 。offsetY ）。 //書き始めの位置からマウスの位置まで線を引く　   
+　 　　　ctx 。ストローク（）; //現在のパスを輪郭表示する　　　　　　　　　　　　  
+
+　 　　　//直前のマウス座標を更新
+　 　　　するmouseX  =  E 。offsetX ;
+　 　　　mouseYの =  E 。offsetY ;
+
+　}
+
+  // mauseup時のイベント　
+　関数 pen_mouseup （）{
+
+　 　　　//クリックをやめるとクリック状態をOFFにする
+　 　　　state  =  false ;
+
+　}
+
+
+//スタンプ■機能
+  // click時に■スタンプを押す
+　関数 square_mouseclick （e ） {
+
+　　　　 //クリックした位置を取得する
+         するmouseX  =  E 。offsetX ;
+         mouseYの =  E 。offsetY ;
+
+	 ctx 。beginPath  （）; 	                 //パスをリセット
+
+         //クリックしていた位置に■を押す
+         ctx 。fillStyle = "green" ;                        //塗りつぶしの色を赤に指定　　
+         ctx 。fillRect （ するmouseX + 5  、 mouseYの+ 5  、 20 、 20 ）。 // 1辺10pxの■のスタンプ　
+   }
+
+//スタンプ▲機能
+  // click時に▲スタンプを押す
+　関数 triangle_mouseclick （e ） {
+
+　　　　 //クリックした位置を取得する
+         するmouseX  =  E 。offsetX ;
+         mouseYの =  E 。offsetY ;
+
+         //クリックしていた位置に▲を押す
+         ctx 。beginPath （）;
+	 ctx 。moveTo （するmouseX 、 mouseYの）。           //最初の点の場所
+	 ctx 。lineTo （するmouseX + 10  、 mouseYの+ 10  ）。   // 2番目の点の場所
+	 ctx 。lineTo （するmouseX - 10  、 mouseYの+ 10 ）。    // 3番目の点の場所
+	 ctx 。closePath （）; 	               //三角形の最後の線closeさせる
+
+	 ctx 。strokeStyle  =  "rgb（0,0,0）" ;        //枠線の色
+	 ctx 。ストローク（）;                         
+
+	 ctx 。fillStyle = "rgba（0,0,255,0.1）" ; //塗りつぶしの色
+	 ctx 。塗りつぶし（）;
+
+   }
+
+//スタンプ●機能
+  // click時に●スタンプを押す
+　関数 maru_mouseclick （e ） {
+
+　　　　 //クリックした位置を取得する
+         するmouseX  =  E 。offsetX ;
+         mouseYの =  E 。offsetY ;
+
+	 ctx 。beginPath  （）; 	                 //パスをリセット
+
+	 //中心（mousex、mousey）で半径：10の円
+	 ctx 。アーク（ するmouseX  、mouseYの 、 10 、 0 * 数学。PI / 180 、 360 * 数学。PI / 180 、 偽）。
+
+	 ctx 。fillStyle  =  "rgba（255,0,0,0.8）"  ; 	  //塗りつぶしの色
+	 ctx 。塗りつぶし（）; 
+	 ctx 。strokeStyle  =  "skyblue"  ; 	          //線の色
+	 ctx 。lineWidth  =  8  ;                       //線の太さ
+
+	 //線を描画を実行
+	 ctx 。ストローク（） ;
+
+	 ctx 。fillStyle = "rgba（0,0,255,0.1）" ; //塗りつぶしの色
+	 ctx 。塗りつぶし（）;
+
+
+　}
+    </script>
 
  </body>
 </head>

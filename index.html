@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset=Shift_JIS>
+    <title>JavaScript課題 Level5 [1]</title>
+    <link rel="stylesheet" type="text/css" href="Canvas_play.css" >
+
+ </head>
+
+
+ <body>
+  <h1>キャンパスノート</h1>
+  <canvas id="canvas" width="640" height="480"></canvas>
+
+ <form class="button_form">
+    <p>ラジオボタンからクリック機能を選択してください</p><br>
+    <form name="select_clickFunc">
+
+      <label>
+        <input id="Radio_pen" name="RadioGroup1" type="radio" onchange="onRadioButtonChange();" checked/><label for="Radio_pen">ペン
+      </label><br/>
+
+      <label>
+        <input id="Radio_square" name="RadioGroup1" type="radio" onchange="onRadioButtonChange();" />スタンプ■
+      </label><br />
+
+      <label>
+        <input id="Radio_triangle" name="RadioGroup1" type="radio" onchange="onRadioButtonChange();" />スタンプ▲
+      </label><br />
+
+      <label>
+        <input id="Radio_maru" name="RadioGroup1" type="radio" onchange="onRadioButtonChange();" />スタンプ●
+      </label><br/>
+
+    </form>
+ </form>
+
+    <script src="Canvas_play.js"></script>
+
+ </body>
+</head>

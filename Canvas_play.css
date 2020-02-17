@@ -1,0 +1,32 @@
+
+
+      h1 {
+            color: #505050;                      /*文字色*/
+            padding: 0.5em;                      /*文字周りの余白*/
+            display: inline-block;              
+            line-height: 1;                      /*行高*/
+            background: #dbebf8;                 /*背景色*/
+            vertical-align: middle;
+            border-radius: 20px 0px 0px 20px;    /*左側の角を丸く*/
+
+      }
+
+
+      h1:before {
+
+              content: '●';
+              color: white;
+              margin-right: 8px;
+
+      }
+
+      #canvas {
+               background: #FFFF88;             /* canvasの色を指定 */
+
+      }
+
+      .button_form {
+
+      }
+
+      
